@@ -19,7 +19,7 @@
         >
           <path fill-rule="evenodd" *ngFor="let path of navItem.path" [attr.d]="path" />
         </svg>
-        <span class="d-xl-inline-block ms-xl-2 ms-0 d-none">{{ navItem.title | translate }}</span>
+        <span class="d-xl-inline-block ms-xl-2 ms-0 d-none">{{ navItem.title }}</span>
 
         <ul
           *ngIf="navItem.navigationItems"
@@ -31,10 +31,9 @@
             (click)="$event.stopPropagation(); setSubActiveLink(j)"
             [ngClass]="{ 'menu-active text-decoration-underline': selectedIndexSubMenu === j }"
             [routerLink]="item.route"
-            routerLinkActive="menu-active text-decoration-underline"
             class="menu__main__sub-link__item"
           >
-            {{ item.title | translate }}
+            {{ item.title }}
           </li>
         </ul>
       </li>
@@ -51,7 +50,7 @@
           fill="white"
         />
       </svg>
-      <span class="d-xl-inline-block ms-xl-3 ms-0 d-none">{{ 'ASIDE_BAR.LOG_OUT' | translate }}</span>
+      <span class="d-xl-inline-block ms-xl-3 ms-0 d-none">LOG OUT</span>
     </li>
   </ul>
 </div>

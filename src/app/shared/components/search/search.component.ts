@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'dash-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
@@ -20,7 +19,6 @@ export class SearchComponent implements OnInit {
   @Input() placeholder = '';
   @Input({ transform: booleanAttribute }) debounceTime: number = 300;
   @Output() searchValueChange = new EventEmitter<string>();
-  protected readonly document = document;
   private debouncer: Subject<string> = new Subject<string>();
 
   ngOnInit() {

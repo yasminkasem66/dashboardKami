@@ -28,16 +28,16 @@ export class ListOfPostsComponent implements OnInit {
   headers: ITableHeaders[] = [
     {
       value: 'title',
-      name: 'POST.TITLE',
+      name: 'Title',
       renderedValue: (value) => {
         return this.slicePipe.transform(value, 0, 100);
       },
     },
     {
       value: 'body',
-      name: 'POST.BODY',
+      name: 'Content',
       renderedValue: (value) => {
-        return this.slicePipe.transform(value, 0, 100);
+        return `${this.slicePipe.transform(value, 0, 100)}...`;
       },
     },
   ];

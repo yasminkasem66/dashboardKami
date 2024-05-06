@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { ITableHeaders } from '../../models/itable-headers';
 import { IActionTable } from '../../models/iactiont-table';
 import { PaginationComponent } from '../pagination/pagination.component';
@@ -8,7 +7,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 @Component({
   selector: 'dash-table',
   standalone: true,
-  imports: [CommonModule, TranslateModule, PaginationComponent],
+  imports: [CommonModule, PaginationComponent],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })

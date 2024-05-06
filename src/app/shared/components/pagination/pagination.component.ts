@@ -10,12 +10,11 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'dash-pagination',
   standalone: true,
-  imports: [CommonModule, TranslateModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })

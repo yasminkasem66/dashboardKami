@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   selector: 'dash-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
