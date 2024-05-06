@@ -1,0 +1,35 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build and dist directories
+/dist
+/out
+
+# Ignore coverage reports
+/coverage
+
+# Ignore compiled TypeScript files
+*.js
+
+# Ignore generated files
+*.js.map
+*.d.ts
+
+# Ignore compiled CSS files
+*.css
+
+# Ignore compiled SASS/SCSS files
+*.scss
+
+# Ignore configuration files
+*.json
+*.yml
+*.yaml
+*.lock
+
+# Ignore image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg

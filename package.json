@@ -7,7 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:dashboardKami": "node dist/dashboard-kami/server/server.mjs"
+    "serve:ssr:dashboardKami": "node dist/dashboard-kami/server/server.mjs",
+    "prepare": "husky",
+    "lint": "ng lint && eslint --fix",
+    "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\"",
+    "prettier-format": "prettier --write .",
+    "precommit-script": "npm run prettier-format && npm run lint "
   },
   "private": true,
   "dependencies": {
@@ -21,6 +26,9 @@
     "@angular/platform-server": "^18.0.0-next.0",
     "@angular/router": "^18.0.0-next.0",
     "@angular/ssr": "^18.0.0-rc.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
+    "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -30,15 +38,28 @@
     "@angular-devkit/build-angular": "^18.0.0-rc.0",
     "@angular/cli": "^18.0.0-rc.0",
     "@angular/compiler-cli": "^18.0.0-next.0",
+    "@eslint/js": "^9.1.1",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "eslint": "^8.57.0",
+    "globals": "^15.1.0",
+    "husky": "^9.0.11",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2"
+    "lint-staged": "^15.2.2",
+    "prettier": "3.2.5",
+    "typescript": "~5.4.2",
+    "typescript-eslint": "^7.8.0"
+  },
+  "engines": {
+    "npm": ">=20.11.1"
+  },
+  "lint-staged": {
+    "{*.js,*.jsx,*.json}": "eslint --cache prettier --write"
   }
 }

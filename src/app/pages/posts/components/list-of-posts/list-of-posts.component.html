@@ -1,0 +1,18 @@
+<div class="mx-auto w-90">
+  <dash-search [inputClasses]="'mb-2'" (searchValueChange)="filteredItems($event)"></dash-search>
+  <select class="form-select mb-4" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+</div>
+<dash-table
+  *ngIf="posts.length > 0"
+  [totalCount]="posts.length"
+  [tableData]="paginatedData"
+  [headers]="headers"
+  [pageSize]="5"
+  [showPagination]="true"
+  (pageNumberChange)="pageNumber = $event; getPage()"
+  [actions]="actions"
+></dash-table>

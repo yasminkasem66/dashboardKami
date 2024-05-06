@@ -1,0 +1,86 @@
+<nav aria-label="pagination" class="pagination">
+  <span class="pagination__label">
+    {{ 'PAGINATION.SHOWING' | translate }} {{ pageSize * currentPage - (pageSize - 1) }}
+    {{ 'PAGINATION.TO' | translate }} {{ Math.min(pageSize * currentPage, totalCount) }}
+    {{ 'PAGINATION.OF' | translate }} {{ totalCount }} {{ 'PAGINATION.ENTRIES' | translate }}</span
+  >
+  <ul class="pagination__control">
+    <li>
+      <button
+        (click)="onFirst()"
+        [attr.aria-disabled]="currentPage === 1"
+        [attr.aria-label]="'PAGINATION.FIRST' | translate"
+        [disabled]="currentPage === 1"
+        class="pagination__control__item-btn"
+      >
+        <img
+          alt="{{ 'PAGINATION.FIRST' | translate }}"
+          height="10"
+          ngSrc="/assets/images/icons/double-chevron-left.svg"
+          width="12"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        (click)="onPrevious()"
+        [attr.aria-disabled]="currentPage === 1"
+        [attr.aria-label]="'PAGINATION.PREVIOUS' | translate"
+        [disabled]="currentPage === 1"
+        class="pagination__control__item-btn"
+      >
+        <img
+          alt="{{ 'PAGINATION.PREVIOUS' | translate }}"
+          height="24"
+          ngSrc="/assets/images/icons/chevron-left.svg"
+          width="24"
+        />
+      </button>
+    </li>
+    <li *ngFor="let page of pages; trackBy: pagesIdentifier">
+      <a
+        (click)="onPageNumberClicked(page)"
+        (keyup.enter)="onPageNumberClicked(page)"
+        [attr.aria-current]="page === currentPage ? 'page' : null"
+        [attr.aria-label]="page === currentPage ? 'Current Page, Page ' + page : 'Go to Page ' + page"
+        [class.current]="page === currentPage"
+        class="inline-block pagination__control__item"
+        tabindex="0"
+      >
+        {{ page }}</a
+      >
+    </li>
+    <li>
+      <button
+        (click)="onNext()"
+        [attr.aria-disabled]="currentPage === totalPages"
+        [attr.aria-label]="'PAGINATION.NEXT' | translate"
+        [disabled]="currentPage === totalPages"
+        class="pagination__control__item-btn"
+      >
+        <img
+          alt="{{ 'PAGINATION.NEXT' | translate }}"
+          height="24"
+          ngSrc="/assets/images/icons/chevron-right.svg"
+          width="24"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        (click)="onLast()"
+        [attr.aria-disabled]="currentPage === totalPages"
+        [attr.aria-label]="'PAGINATION.LAST' | translate"
+        [disabled]="currentPage === totalPages"
+        class="pagination__control__item-btn border-0 border-end border-gray-200"
+      >
+        <img
+          alt="{{ 'PAGINATION.LAST' | translate }}"
+          height="10"
+          ngSrc="/assets/images/icons/double-chevron-right.svg"
+          width="12"
+        />
+      </button>
+    </li>
+  </ul>
+</nav>

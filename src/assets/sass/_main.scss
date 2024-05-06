@@ -1,0 +1,21 @@
+@import "./vendors/vendor-bootstrap.scss";
+
+
+/*  components file import
+================================ */
+@import "./dash-project/compnents/aside-bar";
+
+/* shared components file import
+================================ */
+
+@import "./dash-project/compnents/shared/table";
+@import "./dash-project/compnents/shared/pagination";
+@import "./dash-project/compnents/shared/search";
+
+/*  pages file import
+================================ */
+@import "./dash-project/pages/app";
+
+/*  utils file import
+================================ */
+@import "./dash-project/utils/scroll";

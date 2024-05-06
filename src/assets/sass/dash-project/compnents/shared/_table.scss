@@ -1,0 +1,35 @@
+.table-wrapper {
+    overflow: auto;
+ 
+
+    table {
+        border-collapse: collapse;  
+        border-radius: 10px;
+         border: 2px solid $dash-primary-800;  
+        border-top: none;  
+        overflow: auto;
+        max-width: 90%;
+        margin-inline:auto;
+
+        thead {
+            color: $dash-primary-800;
+        }
+
+        th {
+             border: 2px solid $dash-primary-800;
+            padding: 1rem;
+            text-align: center;
+
+        }
+
+        td {
+            border: 2px solid $dash-primary-800;
+             padding: 1rem;
+            text-align: center;
+            &:first {
+                border-right : none;
+            }
+        }
+    }
+
+}
