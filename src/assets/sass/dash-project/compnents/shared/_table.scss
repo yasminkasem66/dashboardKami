@@ -8,7 +8,7 @@
          border: 2px solid $dash-primary-800;  
         border-top: none;  
         overflow: auto;
-        max-width: 90%;
+        width: 90%;
         margin-inline:auto;
 
         thead {
@@ -24,7 +24,7 @@
 
         td {
             border: 2px solid $dash-primary-800;
-             padding: 1rem;
+            padding: 1rem;
             text-align: center;
             &:first {
                 border-right : none;

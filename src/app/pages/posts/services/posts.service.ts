@@ -19,4 +19,9 @@ export class PostsService {
     const ApiUrl = `${API_URL}${ServicesUrls.LIST_OF_POSTS}`;
     return this.httpClient.get<IPost[]>(ApiUrl);
   }
+
+  deletePost(id: string): Observable<null> {
+    const ApiUrl = `${API_URL}${ServicesUrls.DELETE_POSTS}${id}`;
+    return this.httpClient.delete<null>(ApiUrl);
+  }
 }

@@ -4,4 +4,5 @@ export const ServicesUrls = {
   // auth
   PAGINATED_LIST_OF_POSTS: 'posts?_page={pageNumber}&_per_page={pageSize}',
   LIST_OF_POSTS: 'posts',
+  DELETE_POSTS: 'posts/',
 };

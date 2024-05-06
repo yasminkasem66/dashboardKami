@@ -1,0 +1,9 @@
+<div class="card">
+  <img src="{{ imageUrl }}" class="card-img-top" alt="{{ imageAlt }}" *ngIf="imageUrl" />
+  <div class="card-body">
+    <h5 class="card-title" *ngIf="title">{{ title }}</h5>
+    <p class="card-text" *ngIf="description">{{ description }}</p>
+    <a href="#" class="btn btn-primary" *ngIf="buttonText">{{ buttonText }}</a>
+  </div>
+  <a class="card-link" *ngIf="cardLinkText">{{ cardLinkText }}</a>
+</div>

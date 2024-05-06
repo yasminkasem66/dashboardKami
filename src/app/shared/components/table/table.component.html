@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th *ngFor="let header of headers">{{ header.name }}</th>
-        <th></th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody class="color-shark">
@@ -14,14 +14,13 @@
         <td *ngIf="actions">
           <div
             *ngFor="let action of actions"
-            class="iconStyle d-flex justify-content-stretch align-items-center gap-1 cursor-pointer"
+            class="iconStyle d-flex justify-content-center align-items-center gap-2 cursor-pointer"
             [ngClass]="action.iconClasses"
             (click)="action.callback(item)"
           >
-            <div class="d-flex align-items-center gap-1 justify-content-around">
-              <span class="text-nowrap mb-1">{{ action.label }}</span>
-              <span class="font-size-24 d-inline" [ngClass]="action.icon"></span>
-            </div>
+            <span role="button" tabindex="0" class="text-nowrap mb-1 d-inline-block" [title]="action.label">
+              <i class="pi d-inline-block" [ngClass]="action.icon" style="color: #023e8a"></i>
+            </span>
           </div>
         </td>
       </tr>
