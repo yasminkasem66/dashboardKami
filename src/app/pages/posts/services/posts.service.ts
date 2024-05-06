@@ -21,7 +21,7 @@ export class PostsService {
   }
 
   deletePost(id: string): Observable<null> {
-    const ApiUrl = `${API_URL}${ServicesUrls.DELETE_POSTS}${id}`;
+    const ApiUrl = `${API_URL}${ServicesUrls.DELETE_POST}${id}`;
     return this.httpClient.delete<null>(ApiUrl);
   }
 }

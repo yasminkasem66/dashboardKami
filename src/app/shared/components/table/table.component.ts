@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ITableHeaders } from '../../models/itable-headers';
 import { IActionTable } from '../../models/iactiont-table';
@@ -11,9 +11,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnChanges {
-  private cdr = inject(ChangeDetectorRef);
-
+export class TableComponent {
   @Input({ required: true }) tableData!: { [key: string | number]: any }[];
   @Input({ required: true }) headers!: ITableHeaders[];
   @Input() showPagination: boolean = true;
@@ -25,10 +23,6 @@ export class TableComponent implements OnChanges {
 
   @Output() pageNumberChange: EventEmitter<number> = new EventEmitter<number>();
   protected readonly Math = Math;
-
-  ngOnChanges(): void {
-    this.cdr.detectChanges();
-  }
 
   getRowValueFromHeader(header: ITableHeaders, item: any) {
     if (header.renderedValue) return header.renderedValue(item[header.value]);

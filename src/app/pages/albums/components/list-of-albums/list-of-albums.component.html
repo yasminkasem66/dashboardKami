@@ -1,1 +1,31 @@
-<p>list-of-albums works!</p>
+<div class="mx-auto w-90">
+  <dash-search
+    [inputClasses]="'mb-2'"
+    (searchValueChange)="filteredItems($event)"
+    [searchValue]="searchTerm"
+  ></dash-search>
+  <select
+    #sortSelect
+    class="form-select mb-4 mt-2"
+    aria-label="Default select example"
+    (change)="sortedItems(sortSelect.value)"
+  >
+    <option selected disabled>Open this select menu</option>
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+</div>
+
+@if (albums.length > 0) {
+  <dash-table
+    [totalCount]="albums.length"
+    [tableData]="paginatedData"
+    [headers]="headers"
+    [pageSize]="5"
+    [showPagination]="true"
+    (pageNumberChange)="pageNumber = $event; getPage()"
+    [actions]="actions"
+  ></dash-table>
+} @else {
+  <dash-no-data-found></dash-no-data-found>
+}

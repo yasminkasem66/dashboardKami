@@ -119,7 +119,7 @@ export class ListOfPostsComponent implements OnInit {
     this.router.navigate(['/posts'], {
       relativeTo: this.route,
       queryParams: { searchTerm: searchTerm },
-      queryParamsHandling: 'merge', // Preserve existing query parameters
+      queryParamsHandling: 'merge',
     });
 
     this.posts = this.data.filter((item) => item.title.toLowerCase().includes(searchTerm));

@@ -22,6 +22,13 @@ export const routes: Routes = [
     path: 'albums',
     loadComponent: () =>
       import('./pages/albums/components/list-of-albums/list-of-albums.component').then((c) => c.ListOfAlbumsComponent),
+    title: 'ALBUMS',
+  },
+  {
+    path: 'album-details',
+    loadComponent: () =>
+      import('./pages/albums/components/album-details/album-details.component').then((c) => c.AlbumDetailsComponent),
+    title: 'ALBUMS DETAILS',
   },
   {
     path: '',
