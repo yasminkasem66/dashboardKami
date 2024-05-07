@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { AuthService } from '../../services/auth-service.service';
 import { ILogin } from '../../models/iuser';
 
@@ -18,8 +18,10 @@ export class LoginComponent {
   private authService = inject(AuthService);
 
   loginForm!: FormGroup;
+  localStorage!: any;
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.localStorage = document.defaultView?.localStorage;
     this.createForm();
   }
 
@@ -37,7 +39,7 @@ export class LoginComponent {
       next: (users: ILogin[]) => {
         const exists = users.some((item) => item.email === formValue.email && item.password == formValue.password);
         if (!exists) return;
-        localStorage.setItem('user', this.loginForm.value);
+        this.localStorage.setItem('user', this.loginForm.value);
         this.getNameInitials(this.loginForm.value.email);
         this.route.navigate(['dashboard']);
       },
