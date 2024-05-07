@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MenuItem } from '../../models/menu-item';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
@@ -12,11 +12,16 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
   styleUrls: ['./aside-bar.component.scss'],
 })
 export class AsideBarComponent {
-  router = inject(Router);
+  private router = inject(Router);
 
   openLogoutModel: boolean = false;
   selectedIndexSubMenu!: number;
   selectedIndex!: number;
+  localStorage!: any;
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.localStorage = document.defaultView?.localStorage;
+  }
 
   navList: MenuItem[] = [
     {
@@ -56,7 +61,7 @@ export class AsideBarComponent {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    this.localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

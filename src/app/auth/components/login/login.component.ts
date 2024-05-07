@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { AuthService } from '../../services/auth-service.service';
-import { ILogin } from '../../models/iuser';
 
 @Component({
   selector: 'dash-login',
@@ -18,30 +17,30 @@ export class LoginComponent {
   private authService = inject(AuthService);
 
   loginForm!: FormGroup;
+  localStorage!: any;
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.localStorage = document.defaultView?.localStorage;
     this.createForm();
   }
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      email: ['yasmin.kassem144@gmail.com', [Validators.required, Validators.email]],
+      password: ['yasmin', [Validators.required]],
     });
   }
 
   onLoginFormSubmit(): void {
     if (this.loginForm.invalid) return;
     const formValue = this.loginForm.value;
-    this.authService.login().subscribe({
-      next: (users: ILogin[]) => {
-        const exists = users.some((item) => item.email === formValue.email && item.password == formValue.password);
-        if (!exists) return;
-        localStorage.setItem('user', this.loginForm.value);
-        this.getNameInitials(this.loginForm.value.email);
-        this.route.navigate(['dashboard']);
-      },
-    });
+    const exists = this.authService.getUsers.some(
+      (item) => item.email === formValue.email && item.password == formValue.password,
+    );
+    if (!exists) return;
+    this.localStorage.setItem('user', this.loginForm.value);
+    this.getNameInitials(this.loginForm.value.email);
+    this.route.navigate(['dashboard']);
   }
 
   getNameInitials(user: string) {

@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service.service';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'dash-sign-up',
@@ -18,7 +18,10 @@ export class SignUpComponent {
 
   signupForm!: FormGroup;
 
-  constructor() {
+  localStorage!: any;
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.localStorage = document.defaultView?.localStorage;
     this.createForm();
   }
 
@@ -32,13 +35,10 @@ export class SignUpComponent {
   onSignupFormSubmit(): void {
     if (this.signupForm.invalid) return;
     const formValue = this.signupForm.value;
-    this.authService.signup(formValue).subscribe({
-      next: () => {
-        localStorage.setItem('user', this.signupForm.value);
-        this.getNameInitials(this.signupForm.value.email);
-        this.route.navigate(['dashboard']);
-      },
-    });
+    this.authService.updateUser(formValue);
+    localStorage.setItem('user', formValue);
+    this.getNameInitials(this.signupForm.value.email);
+    this.route.navigate(['dashboard']);
   }
 
   getNameInitials(user: string) {

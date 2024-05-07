@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -12,9 +12,11 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent {
   private router = inject(Router);
   userName: string = 'USER';
+  localStorage!: any;
 
-  constructor() {
-    this.userName = localStorage.getItem('userInitials')!;
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.localStorage = document.defaultView?.localStorage;
+    this.userName = this.localStorage.getItem('userInitials')!;
   }
 
   userDetails() {
