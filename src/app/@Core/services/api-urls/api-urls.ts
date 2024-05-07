@@ -14,6 +14,7 @@ export const ServicesUrls = {
 
   //photos
   LIST_OF_PHOTOS: 'photos',
+  PHOTOS_BY_ALBUM_ID: 'photos?albumId={userId}',
   DELETE_PHOTO: 'photos/',
 
   GET_CURRENT_USER: 'users/',

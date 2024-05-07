@@ -1,1 +1,74 @@
-<p>dashboard works!</p>
+<dash-title-box Header="MY APP" [headerClasses]="'p-4'"></dash-title-box>
+
+<div class="row mt-5 gx-3">
+  <div class="col-xl-6 col-12 border-0 row gx-2">
+    @if (posts$ && albums$ && photos$) {
+      <div class="col-4">
+        <dash-widget
+          [appliedClasses]="' card bg-light'"
+          [iconClasses]="'fs-1'"
+          [routerLink]="'/posts'"
+          [widget]="{
+            icon: 'pi-book',
+            value: (posts$ | async)?.length || 0,
+            name: 'POSTS'
+          }"
+        ></dash-widget>
+      </div>
+      <div class="col-4">
+        <dash-widget
+          [appliedClasses]="' card bg-light'"
+          [iconClasses]="'fs-1'"
+          [routerLink]="'/photos'"
+          [widget]="{
+            icon: 'pi-images',
+            value: (photos$ | async)?.length || 0,
+            name: 'PHOTOS'
+          }"
+        ></dash-widget>
+      </div>
+      <div class="col-4">
+        <dash-widget
+          [appliedClasses]="' card bg-light'"
+          [iconClasses]="'fs-1'"
+          [routerLink]="'/albums'"
+          [widget]="{
+            icon: 'pi-file-o',
+            value: (albums$ | async)?.length || 0,
+            name: 'ALBUMS'
+          }"
+        ></dash-widget>
+      </div>
+    }
+  </div>
+  <div class="col-xl-3 col-12">
+    @if (posts$ | async; as posts) {
+      <dash-title-box [Header]="'POSTS'" headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3">
+        @for (post of posts; track post.id) {
+          <div>{{ post.title }}</div>
+        } @empty {
+          <div>There are no items.</div>
+        }
+      </dash-title-box>
+    }
+  </div>
+  <div class="col-xl-3 col-12">
+    @if (photos$ | async; as photos) {
+      <dash-title-box [Header]="'PHOTOS'" headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3 ">
+        <div class="row gx-1">
+          @for (photo of photos | slice: 0 : 6; track photo.id) {
+            <div class="col-6">
+              <dash-card
+                appliedClasses=" gap-2"
+                [title]="photo.title"
+                [imageUrl]="photo.url"
+                [imageAlt]="photo.title"
+                [data]="photo"
+              ></dash-card>
+            </div>
+          }
+        </div>
+      </dash-title-box>
+    }
+  </div>
+</div>

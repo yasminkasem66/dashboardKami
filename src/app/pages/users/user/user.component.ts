@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../services/user.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { TitleBoxComponent } from '../../../../shared/components/title-box/title-box.component';
-import { IUser } from '../../models/iuser';
+import { TitleBoxComponent } from '../../../shared/components/title-box/title-box.component';
+import { IUser } from '../models/iuser';
 import { Observable } from 'rxjs';
-import { IPost } from '../../../posts/models/ipost';
-import { PostsService } from '../../../posts/services/posts.service';
-import { AlbumsService } from '../../../albums/services/albums.service';
-import { IAlbum } from '../../../albums/models/ialbum';
+import { IPost } from '../../posts/models/ipost';
+import { PostsService } from '../../posts/services/posts.service';
+import { AlbumsService } from '../../albums/services/albums.service';
+import { IAlbum } from '../../albums/models/ialbum';
 
 @Component({
   selector: 'dash-user',

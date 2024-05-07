@@ -15,6 +15,11 @@ export class PhotosService {
     return this.httpClient.get<IPhoto[]>(ApiUrl);
   }
 
+  getPhotosByAlbumId(userId: number): Observable<IPhoto[]> {
+    const ApiUrl = `${API_URL}${ServicesUrls.PHOTOS_BY_ALBUM_ID.replace('{userId}', userId.toString())}`;
+    return this.httpClient.get<IPhoto[]>(ApiUrl);
+  }
+
   deletePhoto(id: string): Observable<null> {
     const ApiUrl = `${API_URL}${ServicesUrls.DELETE_PHOTO}${id}`;
     return this.httpClient.delete<null>(ApiUrl);

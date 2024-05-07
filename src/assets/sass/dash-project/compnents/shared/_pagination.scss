@@ -42,7 +42,9 @@
     max-width: 27rem;
     cursor: pointer;
 
-    @media (max-width: 1024px) {
+
+
+    @media (max-width: 576px) {
       order: 1;
      }
 
@@ -58,6 +60,10 @@
       text-decoration: none;
       transition: background-color 0.3s, color 0.3s;
       flex-grow: 1;
+
+      @media (max-width: 576px) {
+         min-width: 1.5rem;
+       }
 
       &:hover {
         background-color: $dash-primary-200;
@@ -83,6 +89,10 @@
       border-color: #edf2f7;
       transition: background-color 0.3s, color 0.3s;
 
+      @media (max-width: 576px) {
+        min-width: 1.5rem;
+      } 
+      
       &:hover:enabled {
         background-color: $dash-primary-200;
         color: $dash-primary-800;

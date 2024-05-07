@@ -28,7 +28,7 @@ import { IActionTable } from '../../../../shared/models/iactiont-table';
 })
 export class ListOfPhotosComponent extends AbstractComponent implements OnInit {
   private photoService = inject(PhotosService);
-  protected override pageSize: number = 20;
+  protected override pageSize: number = 10;
 
   photos: IPhoto[] = [];
   data: IPhoto[] = [];
