@@ -9,6 +9,11 @@
       "id": "70cd",
       "email": "test@gmail.com",
       "password": "test"
+    },
+    {
+      "id": "d2f0",
+      "email": "yasmin@gmail.com",
+      "password": "yasmin"
     }
   ]
 }
