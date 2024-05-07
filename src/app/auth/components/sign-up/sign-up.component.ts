@@ -35,13 +35,10 @@ export class SignUpComponent {
   onSignupFormSubmit(): void {
     if (this.signupForm.invalid) return;
     const formValue = this.signupForm.value;
-    this.authService.signup(formValue).subscribe({
-      next: () => {
-        localStorage.setItem('user', this.signupForm.value);
-        this.getNameInitials(this.signupForm.value.email);
-        this.route.navigate(['dashboard']);
-      },
-    });
+    this.authService.updateUser(formValue);
+    localStorage.setItem('user', formValue);
+    this.getNameInitials(this.signupForm.value.email);
+    this.route.navigate(['dashboard']);
   }
 
   getNameInitials(user: string) {
