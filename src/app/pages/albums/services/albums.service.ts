@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_URL, ServicesUrls } from '../../../@Core/services/api-urls';
+import { API_URL, ServicesUrls } from '../../../@Core/services/api-urls/api-urls';
 import { IAlbum } from '../models/ialbum';
 
 @Injectable({
@@ -12,6 +12,11 @@ export class AlbumsService {
 
   getListOfAlbums(): Observable<IAlbum[]> {
     const ApiUrl = `${API_URL}${ServicesUrls.LIST_OF_ALBUMS}`;
+    return this.httpClient.get<IAlbum[]>(ApiUrl);
+  }
+
+  getAlbumsByUserId(userId: number): Observable<IAlbum[]> {
+    const ApiUrl = `${API_URL}${ServicesUrls.ALBUMS_BY_USER_ID.replace('{userId}', userId.toString())}`;
     return this.httpClient.get<IAlbum[]>(ApiUrl);
   }
 

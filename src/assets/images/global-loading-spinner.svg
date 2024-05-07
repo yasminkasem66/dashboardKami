@@ -1,7 +1,7 @@
 <svg height="150px" preserveAspectRatio="xMidYMid"
      style="margin: auto; display: block;" viewBox="0 0 100 100" width="150px" xmlns="http://www.w3.org/2000/svg">
   <g transform="translate(50,50)">
-    <circle cx="0" cy="0" fill="none" r="6.25" stroke="#03045e" stroke-dasharray="19.634954084936208 19.634954084936208"
+    <circle cx="0" cy="0" fill="none" r="6.25" stroke="#0077b6" stroke-dasharray="19.634954084936208 19.634954084936208"
             stroke-width="4">
       <animateTransform attributeName="transform" begin="0" calcMode="spline" dur="1s" keySplines="0.2 0 0.8 1"
                         repeatCount="indefinite" times="0;1" type="rotate"
@@ -21,7 +21,7 @@
                         repeatCount="indefinite" times="0;1" type="rotate"
                         values="0 0 0;360 0 0"></animateTransform>
     </circle>
-    <circle cx="0" cy="0" fill="none" r="25" stroke="#03045e" stroke-dasharray="78.53981633974483 78.53981633974483"
+    <circle cx="0" cy="0" fill="none" r="25" stroke="#0077b6" stroke-dasharray="78.53981633974483 78.53981633974483"
             stroke-width="4">
       <animateTransform attributeName="transform" begin="-0.42857142857142855" calcMode="spline" dur="1s"
                         keySplines="0.2 0 0.8 1"

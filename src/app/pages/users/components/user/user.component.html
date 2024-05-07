@@ -1,0 +1,28 @@
+@if (user) {
+  <dash-title-box [Header]="user.name" [headerClasses]="'p-4'"></dash-title-box>
+}
+
+<div class="row mt-5 gap-2">
+  <div class="col-5">
+    @if (posts$ | async; as posts) {
+      <dash-title-box [Header]="'POSTS'" headerClasses="p-2 bg-dash-primary-200 fw-medium  fs-5 rounded mb-3">
+        @for (post of posts; track post.id) {
+          <div>{{ post.title }}</div>
+        } @empty {
+          <div>There are no items.</div>
+        }
+      </dash-title-box>
+    }
+  </div>
+  <div class="col-5">
+    @if (albums$ | async; as albums) {
+      <dash-title-box [Header]="'ALBUMS'" headerClasses="p-2 bg-dash-primary-200 fw-medium  fs-5 rounded mb-3">
+        @for (post of albums; track post.id) {
+          <div>{{ post.title }}</div>
+        } @empty {
+          <div>There are no items.</div>
+        }
+      </dash-title-box>
+    }
+  </div>
+</div>

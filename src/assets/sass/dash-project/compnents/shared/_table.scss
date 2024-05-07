@@ -13,6 +13,7 @@
 
         thead {
             color: $dash-primary-800;
+            background: $light;
         }
 
         th {
@@ -22,6 +23,12 @@
 
         }
 
+        tr{
+            &:nth-child(even){
+                // background-color: $dash-primary-100;
+            }
+        }
+
         td {
             border: 2px solid $dash-primary-800;
             padding: 1rem;
@@ -29,6 +36,8 @@
             &:first {
                 border-right : none;
             }
+
+         
         }
     }
 

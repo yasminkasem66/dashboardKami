@@ -1,4 +1,5 @@
 <div class="mx-auto w-90">
+  <h1 class="text-dash-primary-800 fw-bolder fs-2 mb-4">PHOTOS</h1>
   <dash-search
     [inputClasses]="'mb-2'"
     (searchValueChange)="getFilteredData($event)"
@@ -6,7 +7,7 @@
   ></dash-search>
   <select
     #sortSelect
-    class="form-select mb-4 mt-2"
+    class="form-select mb-5 mt-2"
     aria-label="Default select example"
     (change)="getSortedData(sortSelect.value)"
   >

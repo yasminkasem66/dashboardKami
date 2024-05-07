@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:dashboardKami": "node dist/dashboard-kami/server/server.mjs",
     "prepare": "husky",
-    "lint": "ng lint && eslint --fix",
+    "lint": " eslint --fix",
     "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\"",
     "prettier-format": "prettier --write .",
     "precommit-script": "npm run prettier-format && npm run lint "

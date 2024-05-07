@@ -3,17 +3,14 @@
 	padding-block: 2rem ;
 	font-size: 1rem;
 	color: white;
-	height: 100%;
- 
+  
 	@media (min-width:1499px) {
- 			padding: 2rem ;
-
+ 			padding: 2rem;
  	}
 
 	&__main__link {
 		cursor: pointer;
- 		margin-bottom: 1.5em;
-		padding: .5rem;
+ 		padding: .5rem;
 		color: white;
 		text-decoration: none;
 
@@ -22,10 +19,6 @@
 
 
 	}
-
-		svg {
- 			fill: white;
-		}
 	}
 
 	&__main__sub-link {
@@ -60,8 +53,8 @@
 			transition: all 400ms ease-in-out;
 		}
 
-		svg {
-			fill: $dash-primary-800;
+		i {
+			color: $dash-primary-800 !important;
 		}
 	}
 }

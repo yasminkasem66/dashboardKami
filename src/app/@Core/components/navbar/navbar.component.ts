@@ -11,14 +11,13 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   private router = inject(Router);
-
   userName: string = 'USER';
-  selectedValue: string = 'Farm';
-  idOfCommodityLicense: string = '';
 
-  reloadComponent() {
-    this.router.navigateByUrl('/sales', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/']);
-    });
+  constructor() {
+    this.userName = localStorage.getItem('userInitials')!;
+  }
+
+  userDetails() {
+    this.router.navigate(['user']);
   }
 }

@@ -1,11 +1,2 @@
-<dash-navbar></dash-navbar>
-<div class="d-grid">
-  <div class="aside-bar bg-dash-primary-800">
-    <dash-aside-bar></dash-aside-bar>
-  </div>
-
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>
 <dash-global-loader *ngIf="loaderService.loaderSignal()"></dash-global-loader>
