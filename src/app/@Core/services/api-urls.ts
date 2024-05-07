@@ -9,4 +9,8 @@ export const ServicesUrls = {
   //album
   LIST_OF_ALBUMS: 'albums',
   DELETE_ALBUM: 'albums/',
+
+  //photos
+  LIST_OF_PHOTOS: 'photos',
+  DELETE_PHOTO: 'photos/',
 };

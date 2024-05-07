@@ -31,6 +31,18 @@ export const routes: Routes = [
     title: 'ALBUMS DETAILS',
   },
   {
+    path: 'photos',
+    loadComponent: () =>
+      import('./pages/photos/components/list-of-photos/list-of-photos.component').then((c) => c.ListOfPhotosComponent),
+    title: 'ALBUMS DETAILS',
+  },
+  {
+    path: 'photos-details',
+    loadComponent: () =>
+      import('./pages/photos/components/photo-details/photo-details.component').then((c) => c.PhotoDetailsComponent),
+    title: 'ALBUMS DETAILS',
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

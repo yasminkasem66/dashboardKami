@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { IAlbum } from '../../models/ialbum';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { NoDataFoundComponent } from '../../../../shared/components/no-data-found/no-data-found.component';
+import { IPhoto } from '../../models/iphotos';
 
 @Component({
-  selector: 'dash-album-details',
+  selector: 'dash-photo-details',
   standalone: true,
   imports: [RouterModule, CardComponent, NgIf, NoDataFoundComponent, BackButtonComponent],
-  templateUrl: './album-details.component.html',
-  styleUrl: './album-details.component.scss',
+  templateUrl: './photo-details.component.html',
+  styleUrl: './photo-details.component.scss',
 })
-export class AlbumDetailsComponent {
-  album!: IAlbum;
+export class PhotoDetailsComponent {
+  photo!: IPhoto;
   protected readonly history = history;
 
   ngOnInit(): void {
-    this.album = history.state.album;
+    this.photo = history.state.photo;
   }
 }

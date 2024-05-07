@@ -1,0 +1,48 @@
+<div class="mx-auto w-90">
+  <dash-search
+    [inputClasses]="'mb-2'"
+    (searchValueChange)="getFilteredData($event)"
+    [searchValue]="searchTerm"
+  ></dash-search>
+  <select
+    #sortSelect
+    class="form-select mb-4 mt-2"
+    aria-label="Default select example"
+    (change)="getSortedData(sortSelect.value)"
+  >
+    <option selected disabled>Open this select menu</option>
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+</div>
+
+@if (photos.length > 0) {
+  <div class="row w-90 mx-auto">
+    @for (photo of paginatedData; track photo.id) {
+      <div class="col-md-3 col-6 mb-2">
+        <dash-card
+          appliedClasses=" gap-2"
+          [title]="photo.title"
+          [imageUrl]="photo.url"
+          [imageAlt]="photo.title"
+          [actions]="actions"
+          [data]="photo"
+        ></dash-card>
+      </div>
+    } @empty {
+      <dash-no-data-found></dash-no-data-found>
+    }
+  </div>
+}
+
+<!-- pagination -->
+@if (photos.length > 0) {
+  <div class="my-4 pt-2">
+    <dash-pagination
+      (pageNumberChange)="pageNumberChange($event)"
+      [pageSize]="pageSize"
+      [totalCount]="photos.length"
+      [totalPages]="Math.ceil(photos.length / pageSize)"
+    ></dash-pagination>
+  </div>
+}

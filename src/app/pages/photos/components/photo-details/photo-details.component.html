@@ -1,0 +1,8 @@
+@if (photo) {
+  <div class="w-50 mx-auto">
+    <dash-card [title]="photo.title" [imageUrl]="photo.url" [imageAlt]="photo.title"></dash-card>
+    <dash-back-button [buttonTitle]="'Back'" [buttonClasses]="'mt-5'"></dash-back-button>
+  </div>
+} @else {
+  <dash-no-data-found></dash-no-data-found>
+}

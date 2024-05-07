@@ -6,29 +6,25 @@ import { ITableHeaders } from '../../../../shared/models/itable-headers';
 import { IActionTable } from '../../../../shared/models/iactiont-table';
 import { IPost } from '../../models/ipost';
 import { SearchComponent } from '../../../../shared/components/search/search.component';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NoDataFoundComponent } from '../../../../shared/components/no-data-found/no-data-found.component';
+import { AbstractComponent } from '../../../abstract/abstract/abstract';
 
 @Component({
   selector: 'dash-list-of-posts',
   standalone: true,
-  imports: [TableComponent, AsyncPipe, JsonPipe, NgIf, SearchComponent, RouterModule, NoDataFoundComponent],
+  imports: [TableComponent, AsyncPipe, JsonPipe, NgIf, SearchComponent, NoDataFoundComponent],
   providers: [SlicePipe],
   templateUrl: './list-of-posts.component.html',
   styleUrl: './list-of-posts.component.scss',
 })
-export class ListOfPostsComponent implements OnInit {
+export class ListOfPostsComponent extends AbstractComponent implements OnInit {
   private postService = inject(PostsService);
   private slicePipe = inject(SlicePipe);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
 
-  pageNumber = 1;
-  pageSize = 5;
-  searchTerm: string = '';
   posts: IPost[] = [];
   data: IPost[] = [];
   paginatedData: IPost[] = [];
+  protected override pageSize: number = 5;
 
   headers: ITableHeaders[] = [
     {
@@ -79,13 +75,7 @@ export class ListOfPostsComponent implements OnInit {
   ngOnInit(): void {
     this.getPosts();
     this.setSearchTermOnInit();
-    this.filteredItems(this.searchTerm);
-  }
-
-  private setSearchTermOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.searchTerm = params['searchTerm'] || '';
-    });
+    this.getFilteredData(this.searchTerm);
   }
 
   getPosts() {
@@ -93,9 +83,8 @@ export class ListOfPostsComponent implements OnInit {
       next: (data) => {
         this.data = data;
         this.posts = this.data;
-        this.getPage();
+        this.paginatedData = this.getPage(this.posts);
       },
-      error: () => {},
     });
   }
 
@@ -103,41 +92,23 @@ export class ListOfPostsComponent implements OnInit {
     this.postService.deletePost(id).subscribe({
       next: () => {
         this.posts = this.posts.filter((item) => item.id !== id);
-        this.paginatedData = this.posts.slice(0, this.pageSize);
+        this.paginatedData = this.updatePaginatedData(this.posts);
       },
-      error: () => {},
     });
   }
 
-  getPage() {
-    const startIndex = (this.pageNumber - 1) * this.pageSize;
-    const endIndex = Math.min(startIndex + this.pageSize, this.posts.length);
-    this.paginatedData = this.posts.slice(startIndex, endIndex);
+  pageNumberChange(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.paginatedData = this.getPage(this.posts);
   }
 
-  filteredItems(searchTerm: string) {
-    this.router.navigate(['/posts'], {
-      relativeTo: this.route,
-      queryParams: { searchTerm: searchTerm },
-      queryParamsHandling: 'merge',
-    });
-
-    this.posts = this.data.filter((item) => item.title.toLowerCase().includes(searchTerm));
-    this.paginatedData = this.posts.slice(0, this.pageSize);
+  getFilteredData(searchTerm: string) {
+    this.posts = this.filteredItems(searchTerm, '/posts', this.data);
+    this.paginatedData = this.updatePaginatedData(this.posts);
   }
 
-  sortedItems(sortTerm: string) {
-    if (sortTerm === 'asc') {
-      this.posts = this.data.slice().sort((a, b) => {
-        return a.title.localeCompare(b.title);
-      });
-    } else if (sortTerm === 'desc') {
-      this.posts = this.data.slice().sort((a, b) => {
-        return b.title.localeCompare(a.title);
-      });
-    }
-
-    // Update paginatedData with sorted posts
-    this.paginatedData = this.posts.slice(0, this.pageSize);
+  getSortedData(sortTerm: string) {
+    this.posts = this.sortedItems(sortTerm, this.data);
+    this.paginatedData = this.updatePaginatedData(this.posts);
   }
 }
