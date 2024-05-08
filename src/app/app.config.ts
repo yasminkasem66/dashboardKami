@@ -7,6 +7,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { loaderInterceptorInterceptor } from './@Core/interceptors/loader-interceptor.interceptor';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([loaderInterceptorInterceptor])),
     provideAnimations(),
     provideAnimationsAsync(),
+    provideHttpClientTesting(),
   ],
 };

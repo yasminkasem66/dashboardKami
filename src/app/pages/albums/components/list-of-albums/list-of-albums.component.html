@@ -2,14 +2,14 @@
   <h1 class="text-dash-primary-800 fw-bolder fs-2 mb-4">ALBUMS</h1>
   <dash-search
     [inputClasses]="'mb-2'"
-    (searchValueChange)="filteredItems($event)"
+    (searchValueChange)="getFilteredData($event)"
     [searchValue]="searchTerm"
   ></dash-search>
   <select
     #sortSelect
     class="form-select mb-4 mt-2"
     aria-label="Default select example"
-    (change)="sortedItems(sortSelect.value)"
+    (change)="getSortedData(sortSelect.value)"
   >
     <option selected disabled>Open this select menu</option>
     <option value="asc">Ascending</option>
@@ -24,7 +24,7 @@
     [headers]="headers"
     [pageSize]="5"
     [showPagination]="true"
-    (pageNumberChange)="pageNumber = $event; getPage()"
+    (pageNumberChange)="pageNumber = $event; getPage(albums)"
     [actions]="actions"
   ></dash-table>
 } @else {

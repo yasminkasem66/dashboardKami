@@ -1,13 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { IActionTable } from '../../../../shared/models/iactiont-table';
 import { ITableHeaders } from '../../../../shared/models/itable-headers';
 import { AlbumsService } from '../../services/albums.service';
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NoDataFoundComponent } from '../../../../shared/components/no-data-found/no-data-found.component';
 import { SearchComponent } from '../../../../shared/components/search/search.component';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { IAlbum } from '../../models/ialbum';
+import { AbstractComponent } from '../../../abstract/abstract/abstract';
 @Component({
   selector: 'dash-list-of-albums',
   standalone: true,
@@ -15,24 +16,14 @@ import { IAlbum } from '../../models/ialbum';
   templateUrl: './list-of-albums.component.html',
   styleUrl: './list-of-albums.component.scss',
 })
-export class ListOfAlbumsComponent {
-  private albumService = inject(AlbumsService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+export class ListOfAlbumsComponent extends AbstractComponent implements OnInit {
+  private albumsService = inject(AlbumsService);
+  protected override pageSize: number = 10;
 
-  pageNumber = 1;
-  pageSize = 5;
-  searchTerm: string = '';
   albums: IAlbum[] = [];
   data: IAlbum[] = [];
   paginatedData: IAlbum[] = [];
-
-  headers: ITableHeaders[] = [
-    {
-      value: 'title',
-      name: 'Title',
-    },
-  ];
+  protected readonly Math = Math;
 
   actions: IActionTable[] = [
     {
@@ -40,8 +31,8 @@ export class ListOfAlbumsComponent {
       label: 'See more',
       icon: 'pi-info-circle',
       iconClasses: ' cursor-pointer',
-      callback: (album) => {
-        this.router.navigate(['album-details'], { state: { album } });
+      callback: (photo) => {
+        this.router.navigate(['photos-details'], { state: { photo } });
       },
     },
     {
@@ -57,77 +48,56 @@ export class ListOfAlbumsComponent {
       label: 'Delete',
       icon: 'pi-trash',
       iconClasses: ' cursor-pointer',
-      callback: (post) => {
-        this.deleteAlbum(post.id);
+      callback: (photo) => {
+        this.deletePhoto(photo.id);
       },
+    },
+  ];
+
+  headers: ITableHeaders[] = [
+    {
+      value: 'title',
+      name: 'Title',
     },
   ];
 
   ngOnInit(): void {
     this.getAlbums();
     this.setSearchTermOnInit();
-    this.filteredItems(this.searchTerm);
-  }
-
-  private setSearchTermOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.searchTerm = params['searchTerm'] || '';
-    });
+    this.getFilteredData(this.searchTerm);
   }
 
   getAlbums() {
-    this.albumService.getListOfAlbums().subscribe({
+    this.albumsService.getListOfAlbums().subscribe({
       next: (data) => {
         this.data = data;
         this.albums = this.data;
-        this.getPage();
+        this.paginatedData = this.getPage(this.albums);
       },
-      error: () => {},
     });
   }
 
-  deleteAlbum(id: string) {
-    this.albumService.deleteAlbum(id).subscribe({
+  deletePhoto(id: string) {
+    this.albumsService.deleteAlbum(id).subscribe({
       next: () => {
         this.albums = this.albums.filter((item) => item.id !== id);
-        this.updatePaginatedData();
+        this.paginatedData = this.updatePaginatedData(this.albums);
       },
-      error: () => {},
     });
   }
 
-  getPage() {
-    const startIndex = (this.pageNumber - 1) * this.pageSize;
-    const endIndex = Math.min(startIndex + this.pageSize, this.albums.length);
-    this.paginatedData = this.albums.slice(startIndex, endIndex);
+  pageNumberChange(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.paginatedData = this.getPage(this.albums);
   }
 
-  filteredItems(searchTerm: string) {
-    this.router.navigate(['/albums'], {
-      relativeTo: this.route,
-      queryParams: { searchTerm: searchTerm },
-      queryParamsHandling: 'merge',
-    });
-
-    this.albums = this.data.filter((item) => item.title.toLowerCase().includes(searchTerm));
-    this.updatePaginatedData();
+  getFilteredData(searchTerm: string) {
+    this.albums = this.filteredItems(searchTerm, '/albums', this.data);
+    this.paginatedData = this.updatePaginatedData(this.albums);
   }
 
-  sortedItems(sortTerm: string) {
-    if (sortTerm === 'asc') {
-      this.albums = this.data.slice().sort((a, b) => {
-        return a.title.localeCompare(b.title);
-      });
-    } else if (sortTerm === 'desc') {
-      this.albums = this.data.slice().sort((a, b) => {
-        return b.title.localeCompare(a.title);
-      });
-    }
-
-    this.updatePaginatedData();
-  }
-
-  private updatePaginatedData() {
-    this.paginatedData = this.albums.slice(0, this.pageSize);
+  getSortedData(sortTerm: string) {
+    this.albums = this.sortedItems(sortTerm, this.data);
+    this.paginatedData = this.updatePaginatedData(this.albums);
   }
 }
