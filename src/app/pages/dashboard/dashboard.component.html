@@ -1,7 +1,7 @@
 <dash-title-box Header="MY APP" [headerClasses]="'p-4'"></dash-title-box>
 
 <div class="row mt-5 gx-3">
-  <div class="col-xl-6 col-12 border-0 row gx-2">
+  <div class="col-xl-6 col-12 border-0 row gx-2 mb-3">
     @if (posts$ && albums$ && photos$) {
       <div class="col-md-4 col-12">
         <dash-widget
@@ -43,7 +43,11 @@
   </div>
   <div class="col-xl-3 col-12">
     @if (posts$ | async; as posts) {
-      <dash-title-box [Header]="'POSTS'" headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3">
+      <dash-title-box
+        [Header]="'POSTS'"
+        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3"
+        [appliedClasses]="'mb-5'"
+      >
         @for (post of posts; track post.id) {
           <div>{{ post.title }}</div>
         } @empty {
@@ -54,7 +58,11 @@
   </div>
   <div class="col-xl-3 col-12">
     @if (photos$ | async; as photos) {
-      <dash-title-box [Header]="'PHOTOS'" headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3 ">
+      <dash-title-box
+        [Header]="'PHOTOS'"
+        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3"
+        [appliedClasses]="'mb-5'"
+      >
         <div class="row gx-1">
           @for (photo of photos | slice: 0 : 6; track photo.id) {
             <div class="col-6">
