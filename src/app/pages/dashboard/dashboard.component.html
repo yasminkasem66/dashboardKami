@@ -45,7 +45,7 @@
     @if (posts$ | async; as posts) {
       <dash-title-box
         [Header]="'POSTS'"
-        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3"
+        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-5 rounded mb-3"
         [appliedClasses]="'mb-5'"
       >
         @for (post of posts; track post.id) {
@@ -60,7 +60,7 @@
     @if (photos$ | async; as photos) {
       <dash-title-box
         [Header]="'PHOTOS'"
-        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-6 rounded mb-3"
+        headerClasses="p-1 bg-dash-primary-400 fw-medium  fs-5 rounded mb-3"
         [appliedClasses]="'mb-5'"
       >
         <div class="row gx-1">

@@ -7,7 +7,7 @@
   ></dash-search>
   <select
     #sortSelect
-    class="form-select mb-4 mt-2"
+    class="form-select mb-3 mt-2"
     aria-label="Default select example"
     (change)="getSortedData(sortSelect.value)"
   >
@@ -15,6 +15,12 @@
     <option value="asc">Ascending</option>
     <option value="desc">Descending</option>
   </select>
+
+  <div class="d-flex justify-content-end mb-4">
+    <button class="btn text-white bg-dash-primary-800 d-flex align-items-center" (click)="openAddPostModal()">
+      <span>Add post</span>
+    </button>
+  </div>
 </div>
 
 @if (posts.length > 0) {
@@ -29,4 +35,20 @@
   ></dash-table>
 } @else {
   <dash-no-data-found></dash-no-data-found>
+}
+
+@if (openEditModal) {
+  <dash-add-edit-post
+    [openModal]="openEditModal"
+    [actionTypeValue]="actionType.edit"
+    (actionClicked)="editPost($event); openEditModal = false"
+    [post]="post"
+  ></dash-add-edit-post>
+}
+
+@if (openAddModal) {
+  <dash-add-edit-post
+    [openModal]="openAddModal"
+    (actionClicked)="addPost($event); openAddModal = false"
+  ></dash-add-edit-post>
 }

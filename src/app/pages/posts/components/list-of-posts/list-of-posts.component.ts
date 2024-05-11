@@ -8,11 +8,13 @@ import { IPost } from '../../models/ipost';
 import { SearchComponent } from '../../../../shared/components/search/search.component';
 import { NoDataFoundComponent } from '../../../../shared/components/no-data-found/no-data-found.component';
 import { AbstractComponent } from '../../../abstract/abstract/abstract';
+import { AddEditPostComponent } from '../add-edit-post/add-edit-post.component';
+import { ActionType } from '../../enums/action-type';
 
 @Component({
   selector: 'dash-list-of-posts',
   standalone: true,
-  imports: [TableComponent, AsyncPipe, JsonPipe, NgIf, SearchComponent, NoDataFoundComponent],
+  imports: [TableComponent, AsyncPipe, JsonPipe, NgIf, SearchComponent, NoDataFoundComponent, AddEditPostComponent],
   providers: [SlicePipe],
   templateUrl: './list-of-posts.component.html',
   styleUrl: './list-of-posts.component.scss',
@@ -21,10 +23,14 @@ export class ListOfPostsComponent extends AbstractComponent implements OnInit {
   private postService = inject(PostsService);
   private slicePipe = inject(SlicePipe);
 
+  post!: IPost;
   posts: IPost[] = [];
   data: IPost[] = [];
   paginatedData: IPost[] = [];
   protected override pageSize: number = 5;
+  openEditModal: boolean = false;
+  openAddModal: boolean = false;
+  actionType: typeof ActionType = ActionType;
 
   headers: ITableHeaders[] = [
     {
@@ -59,7 +65,10 @@ export class ListOfPostsComponent extends AbstractComponent implements OnInit {
       icon: 'pi-pen-to-square',
       iconClasses: ' cursor-pointer',
       // eslint-disable-next-line
-      callback: (item) => {},
+      callback: (item) => {
+        this.openEditModal = true;
+        this.post = item;
+      },
     },
     {
       name: 'Delete',
@@ -109,6 +118,28 @@ export class ListOfPostsComponent extends AbstractComponent implements OnInit {
 
   getSortedData(sortTerm: string) {
     this.posts = this.sortedItems(sortTerm, this.data);
+    this.paginatedData = this.updatePaginatedData(this.posts);
+  }
+
+  openAddPostModal() {
+    this.openAddModal = true;
+  }
+
+  addPost(event: any) {
+    this.posts.unshift(event);
+    this.paginatedData = this.updatePaginatedData(this.posts);
+  }
+
+  editPost(item: IPost) {
+    item.id = this.post.id;
+    const postIndex = this.posts.findIndex((post) => post.id == this.post.id);
+    if (postIndex !== -1) {
+      this.posts[postIndex] = { ...this.posts[postIndex], ...item };
+      this.paginatedData = this.updatePaginatedData(this.posts);
+      return this.posts;
+    }
+    return this.posts;
+
     this.paginatedData = this.updatePaginatedData(this.posts);
   }
 }

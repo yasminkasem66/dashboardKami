@@ -1,0 +1,24 @@
+<dash-modal
+  [title]="actionTypeValue == actionType.add ? 'Add Post' : 'Edit Post'"
+  *ngIf="openModal"
+  (modalClosed)="openModal = false"
+  [closeBtnTitle]="'Close'"
+  [submitBtnTitle]="actionName"
+  (modalSubmitted)="modalSubmitted()"
+  [wrapperClasses]="'w-25'"
+  [closeBtnStyle]="'px-3 py-2'"
+>
+  <div>
+    <form [formGroup]="postForm" class="row">
+      <div class="mb-3">
+        <label for="title" class="form-label">title</label>
+        <input type="title" class="form-control" formControlName="title" id="title" placeholder="title" />
+      </div>
+
+      <div class="mb-3">
+        <label for="body" class="form-label">content</label>
+        <textarea class="form-control" formControlName="body" id="body" rows="3" placeholder="content"></textarea>
+      </div>
+    </form>
+  </div>
+</dash-modal>
