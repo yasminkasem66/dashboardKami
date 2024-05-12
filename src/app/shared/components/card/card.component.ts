@@ -19,4 +19,6 @@ export class CardComponent {
   @Input() appliedClasses: string = '';
   @Input() actions?: IActionTable[];
   @Input() data!: any;
+
+  constructor() {}
 }
