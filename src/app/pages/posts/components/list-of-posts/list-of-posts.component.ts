@@ -83,8 +83,6 @@ export class ListOfPostsComponent extends AbstractComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
-    this.setSearchTermOnInit();
-    this.getFilteredData(this.searchTerm);
   }
 
   getPosts() {
@@ -93,6 +91,8 @@ export class ListOfPostsComponent extends AbstractComponent implements OnInit {
         this.data = data;
         this.posts = this.data;
         this.paginatedData = this.getPage(this.posts);
+        this.setSearchTermOnInit();
+        this.getFilteredData(this.searchTerm);
       },
     });
   }
